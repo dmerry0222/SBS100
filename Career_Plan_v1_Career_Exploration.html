@@ -16,9 +16,7 @@ label{display:block;font-weight:650;margin:13px 0} input[type=text],input[type=e
 textarea{resize:vertical} .row{display:grid;grid-template-columns:1fr 1fr;gap:12px} .callout{background:#f3f8fc;border-left:4px solid var(--blue);padding:13px 15px;border-radius:9px;margin:14px 0}
 .nacegrid{display:grid;grid-template-columns:1fr 1fr;gap:12px} .nace{border:1px solid var(--line);border-radius:12px;padding:14px} .nace strong{display:block;margin-bottom:7px}
 .chips{display:flex;gap:7px;flex-wrap:wrap} .chip{background:#edf3f8;border-radius:999px;padding:6px 9px;font-size:12px}
-.choices{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:8px} .choices input{display:none} .choices span{display:block;border:1px solid var(--line);padding:9px;text-align:center;border-radius:9px;cursor:pointer}
-.choices input:checked+span{background:#edf4fb;border-color:var(--blue);font-weight:800} .scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
-.q{padding:12px 0;border-bottom:1px solid #eef1f4} .occ{border:1px solid var(--line);border-radius:13px;padding:16px;margin:14px 0;background:#fcfdff}
+.likert-table{width:100%;border-collapse:collapse;margin-top:10px}.likert-table th,.likert-table td{border-bottom:1px solid #edf1f4;padding:9px 7px;text-align:center;vertical-align:middle}.likert-table th:first-child,.likert-table td:first-child{text-align:left}.likert-table th{font-size:11px;color:var(--muted);font-weight:700}.likert-table td:first-child{font-size:13px;line-height:1.35}.likert-table input[type=radio]{width:16px;height:16px;accent-color:var(--blue)}.likert-note{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px} .occ{border:1px solid var(--line);border-radius:13px;padding:16px;margin:14px 0;background:#fcfdff}
 .occnum{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800} .btn{display:inline-block;border:0;border-radius:9px;padding:10px 14px;font-weight:750;cursor:pointer;text-decoration:none}
 .primary{background:var(--navy);color:#fff} .secondary{background:#edf2f7;color:var(--navy)} .success{background:var(--green);color:#fff}
 .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px} .goals{display:grid;gap:10px} .goal{border:1px solid var(--line);border-radius:11px;padding:12px}
@@ -49,17 +47,17 @@ textarea{resize:vertical} .row{display:grid;grid-template-columns:1fr 1fr;gap:12
 <h2>B. Revisit your Suitable NACE-Ready self-assessment</h2>
 <p>Earlier this semester, your Suitable NACE-Ready self-assessment highlighted competencies that were stronger for you and others with more room to grow. Here is a mock example of what could be resurfaced automatically.</p>
 <div class="nacegrid">
- <div class="nace"><strong>Highest-rated competencies</strong><div class="chips"><span class="chip">Communication</span><span class="chip">Critical Thinking</span></div></div>
- <div class="nace"><strong>Lowest-rated competencies</strong><div class="chips"><span class="chip">Technology</span><span class="chip">Career &amp; Self-Development</span></div></div>
+ <div class="nace"><strong>Competency identified as a strength</strong><div class="chips"><span class="chip">Communication</span></div></div>
+ <div class="nace"><strong>Competency identified for development</strong><div class="chips"><span class="chip">Technology</span></div></div>
 </div>
 <label>Looking back now, what stands out to you about these results? Do they still feel accurate? Why or why not?
-<textarea id="naceReflection" rows="4" placeholder="A short reflection is enough."></textarea></label>
+<textarea id="naceReflection" rows="4"></textarea></label>
 </section>
 
 <section class="card">
 <h2>C. Explore three possible occupations</h2>
 <p>Open the <a href="https://dmerry0222.github.io/CareerStrategyandDesign/suffolk-career-pathways_13.html" target="_blank" rel="noopener"><strong>Suffolk Career Pathways site ↗</strong></a>. Explore pathways that interest you, then use each pathway's <strong>Possible Occupations</strong> section and linked labor-market information to identify three occupations you might want to learn more about.</p>
-<div class="callout"><strong>You are exploring, not choosing your forever career.</strong> An occupation can be worth researching even if your conclusion is that it is probably not for you.</div>
+<p>You are exploring, not choosing your forever career. An occupation can be worth researching even if your conclusion is that it is probably not for you.</p>
 <datalist id="occupationList"><option value="Accountants and Auditors"></option>
 <option value="Actors"></option>
 <option value="Actuaries"></option>
@@ -256,11 +254,39 @@ textarea{resize:vertical} .row{display:grid;grid-template-columns:1fr 1fr;gap:12
 <section class="card">
 <h2>E. Current Direction</h2>
 <p>Based on what you know today, describe one direction that feels worth exploring. You might focus on problems you want to solve, types of work you enjoy, industries you're curious about, or impact you'd like to have.</p>
-<label>My current direction<textarea id="direction" rows="5" placeholder="Right now, a direction I want to explore is..."></textarea></label>
+<div class="callout"><strong>Aim for about 75–125 words.</strong> You do not need to have your career figured out. The goal is simply to put a stake in the ground based on what interests you now — knowing that your direction may change as you learn and gain experience.</div>
+<label>My current direction
+<textarea id="direction" rows="5" placeholder="Right now, a direction I want to explore is..."></textarea>
+<span class="help" id="directionWordCount">0 words · suggested range: 75–125</span>
+</label>
 </section>
 
 <section class="card">
-<h2>F. My Next Steps</h2>
+<h2>F. First Internship Planning</h2>
+<p>You do not need to know exactly where you will intern yet. The goal is to begin thinking about timing and what kind of experience might help you explore your interests.</p>
+<div class="row">
+  <label>When do you currently think you might pursue your first internship?
+    <select id="internshipTiming">
+      <option value="">Choose...</option>
+      <option>Summer after first year</option>
+      <option>During second year</option>
+      <option>Summer after second year</option>
+      <option>During third year</option>
+      <option>Summer after third year</option>
+      <option>I'm not sure yet</option>
+    </select>
+  </label>
+  <label>What kind of organization might you want to explore?
+    <input id="internshipOrg" type="text" placeholder="e.g., a financial firm, nonprofit, startup, hospital, government agency">
+  </label>
+</div>
+<label>What kind of role, work, or experience might you be looking for?
+  <textarea id="internshipRole" rows="3" placeholder="For example: a role where I can work with data, support marketing projects, learn about HR, or see how a business operates."></textarea>
+</label>
+</section>
+
+<section class="card">
+<h2>G. My Next Steps</h2>
 <p>Choose <strong>two</strong> actions you will take next. When you select an action, add enough detail that your future self can tell whether you followed through.</p>
 <div class="goals" id="goals"></div>
 <div class="callout" id="goalCount">0 of 2 next steps selected</div>
@@ -295,14 +321,34 @@ const questions=[
 'I feel confident taking the next steps in my career development.',
 'I know what I should be doing over the next year to prepare for future career opportunities.'
 ];
+const likertTable=document.createElement('table');
+likertTable.className='likert-table';
+likertTable.innerHTML=`<thead><tr><th>Statement</th>${[1,2,3,4,5].map(n=>`<th>${n}</th>`).join('')}</tr></thead><tbody></tbody>`;
 questions.forEach((q,i)=>{
- let d=document.createElement('div');d.className='q';
- d.innerHTML=`<label>${i+1}. ${q}</label><div class="choices">${[1,2,3,4,5].map(n=>`<label><input type="radio" name="q${i}" value="${n}" ${state.likert[i]==n?'checked':''}><span>${n}</span></label>`).join('')}</div><div class="scale"><span>Strongly disagree</span><span>Strongly agree</span></div>`;
- likert.appendChild(d);
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${q}</td>${[1,2,3,4,5].map(n=>`<td><input aria-label="${q} - ${n}" type="radio" name="q${i}" value="${n}" ${state.likert[i]==n?'checked':''}></td>`).join('')}`;
+  likertTable.querySelector('tbody').appendChild(tr);
 });
+likert.appendChild(likertTable);
+const likertNote=document.createElement('div');
+likertNote.className='likert-note';
+likertNote.innerHTML='<span>1 = Strongly disagree</span><span>5 = Strongly agree</span>';
+likert.appendChild(likertNote);
 likert.addEventListener('change',e=>{if(e.target.type==='radio'){state.likert[e.target.name.slice(1)]=+e.target.value;save()}});
 
-hydrate('naceReflection');hydrate('alumUrl');hydrate('alumWhy');hydrate('alumMessage');hydrate('direction');
+hydrate('naceReflection');hydrate('alumUrl');hydrate('alumWhy');hydrate('alumMessage');hydrate('direction');hydrate('internshipTiming');hydrate('internshipOrg');hydrate('internshipRole');
+function updateDirectionWordCount(){
+  const t=(state.direction||'').trim();
+  const n=t?t.split(/\s+/).length:0;
+  const el=document.getElementById('directionWordCount');
+  if(!el)return;
+  if(n===0) el.textContent='0 words · suggested range: 75–125';
+  else if(n<75) el.textContent=`${n} words · add a little more detail (suggested: 75–125)`;
+  else if(n<=125) el.textContent=`${n} words · nice — you're in the suggested range`;
+  else el.textContent=`${n} words · consider tightening this to about 75–125 words`;
+}
+document.getElementById('direction').addEventListener('input',updateDirectionWordCount);
+updateDirectionWordCount();
 
 function occCard(i){
  let o=state.occ[i]||{};
@@ -358,12 +404,13 @@ function selectedGoals(){return goalDefs.filter(x=>state.goals[x[0]]?.checked)}
 function renderGoalCount(){goalCount.textContent=`${selectedGoals().length} of 2 next steps selected`}
 
 function completeness(){
- let done=0,total=5+1+3*6+3+1+2; // likert + NACE + occupation fields + networking + direction + goals
+ let done=0,total=5+1+3*6+3+1+3+2; // likert + NACE + occupation fields + networking + direction + internship + goals
  done+=Object.keys(state.likert).length;
  if((state.naceReflection||'').trim())done++;
  state.occ.forEach(o=>['name','why','earnings','growth','learned','interest'].forEach(f=>{if((o[f]||'').trim())done++}));
  ['alumUrl','alumWhy','alumMessage'].forEach(f=>{if((state[f]||'').trim())done++});
  if((state.direction||'').trim())done++;
+ ['internshipTiming','internshipOrg','internshipRole'].forEach(f=>{if((state[f]||'').trim())done++});
  selectedGoals().forEach(([k])=>{if((state.goals[k]?.detail||'').trim())done++});
  return {done,total};
 }
@@ -376,6 +423,9 @@ finishBtn.onclick=()=>{
  state.occ.forEach((o,i)=>{['name','why','earnings','growth','learned','interest'].forEach(f=>{if(!(o[f]||'').trim())missing.push(`Occupation ${i+1}: ${f}`)})})
  if(!(state.alumUrl||'').trim()||!(state.alumWhy||'').trim()||!(state.alumMessage||'').trim())missing.push('networking section');
  if(!(state.direction||'').trim())missing.push('current direction');
+ if(!(state.internshipTiming||'').trim())missing.push('internship timing');
+ if(!(state.internshipOrg||'').trim())missing.push('type of organization for a possible internship');
+ if(!(state.internshipRole||'').trim())missing.push('type of internship role or experience');
  if(selectedGoals().length!==2)missing.push('exactly two next steps');
  selectedGoals().forEach(([k,label])=>{if(!(state.goals[k]?.detail||'').trim())missing.push(`follow-up detail for "${label}"`)});
  if(missing.length){alert('Please complete:\n\n• '+missing.join('\n• '));return}
@@ -395,6 +445,10 @@ pdfBtn.onclick=()=>{
  state.occ.forEach((o,i)=>{text(`${i+1}. ${o.name}`,11,true,4);text(`Median annual earnings: ${o.earnings}   |   10-year employment trend: ${o.growth}`,9,false,4);text(`Why it interested me: ${o.why}`,9,false,4);text(`What I learned: ${o.learned}`,9,false,4);text(`Interest after research: ${o.interest}`,9,false,12)});
  text('Networking practice',12,true,6);text(`Alum profile: ${state.alumUrl}`,9,false,4);text(state.alumWhy,9,false,4);text(`Draft message: ${state.alumMessage}`,9,false,14);
  text('Current Direction',12,true,6);text(state.direction,10,false,14);
+ text('First Internship Planning',12,true,6);
+ text(`Timing: ${state.internshipTiming}`,10,false,4);
+ text(`Organization type: ${state.internshipOrg}`,10,false,4);
+ text(`Role / experience: ${state.internshipRole}`,10,false,14);
  text('My next steps',12,true,6);selectedGoals().forEach(([k,label])=>text(`• ${label} — ${state.goals[k].detail}`,10,false,6));
  doc.save('Career_Plan_v1_Career_Exploration.pdf');
 };
